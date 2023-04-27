@@ -7,8 +7,8 @@
 # -----------------------------------------------------------------------------
 import init_path
 from util import logger
-from gated_graph_policy_network import GGNN
-from baseline_network import tf_baseline_network
+from network.gated_graph_policy_network import GGNN
+from network.baseline_network import tf_baseline_network
 
 
 class tf_ggnn_baseline_network(GGNN, tf_baseline_network):

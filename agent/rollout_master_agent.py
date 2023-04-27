@@ -13,7 +13,7 @@ from util import logger
 from util import parallel_util
 from util import model_saver
 from six.moves import xrange
-from rollout_agent import rollout_agent
+from agent.rollout_agent import rollout_agent
 import numpy as np
 from graph_util import structure_mapper
 
