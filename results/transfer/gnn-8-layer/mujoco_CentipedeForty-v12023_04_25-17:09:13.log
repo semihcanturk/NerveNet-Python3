@@ -1,0 +1,163 @@
+[0425 17:09:15 @logger.py:82] Log file set to /Users/semo/PycharmProjects/NerveNet/log/mujoco_CentipedeForty-v12023_04_25-17:09:13.log
+[0425 17:09:15 @rollout_master_agent.py:155] [LOAD_CKPT] loading observation normalizer info
+[0425 17:09:15 @model_saver.py:253] [LOAD/SAVE] checkpoint path is /Users/semo/PycharmProjects/NerveNet/tool/../checkpoint/cent6-gnn-8-layer/CentipedeSix-v1_2023_04_24-17:13:35_2360_normalizer.npy
+[0425 17:09:15 @model_saver.py:146] LOADING numpy variables
+[0425 17:09:15 @model_saver.py:155] 		loading numpy pretrained parameters mean
+[0425 17:09:15 @model_saver.py:155] 		loading numpy pretrained parameters variance
+[0425 17:09:15 @model_saver.py:155] 		loading numpy pretrained parameters step
+[0425 17:09:15 @model_saver.py:155] 		loading numpy pretrained parameters square_sum
+[0425 17:09:15 @model_saver.py:155] 		loading numpy pretrained parameters sum
+[0425 17:09:15 @mujoco_parser.py:331] 17 joint found
+[0425 17:09:15 @mujoco_parser.py:331] 15 body found
+[0425 17:09:15 @mujoco_parser.py:489] scanning ob information...
+[0425 17:09:15 @mujoco_parser.py:538] after qpos, the ob size is reaching 21
+[0425 17:09:15 @mujoco_parser.py:538] after qvel, the ob size is reaching 43
+[0425 17:09:15 @mujoco_parser.py:538] after cfrc, the ob size is reaching 139
+[0425 17:09:15 @summary_handler.py:44] summary write initialized, writing to /Users/semo/PycharmProjects/NerveNet/summary/CentipedeForty-v1_2023_04_25-17:09:13
+[0425 17:09:15 @gated_graph_policy_network.py:79] Network shape is [64, 64]
+[0425 17:09:15 @mujoco_parser.py:331] 119 joint found
+[0425 17:09:15 @mujoco_parser.py:331] 100 body found
+[0425 17:09:15 @mujoco_parser.py:489] scanning ob information...
+[0425 17:09:15 @mujoco_parser.py:538] after qpos, the ob size is reaching 123
+[0425 17:09:15 @mujoco_parser.py:538] after qvel, the ob size is reaching 247
+[0425 17:09:15 @mujoco_parser.py:538] after cfrc, the ob size is reaching 853
+[0425 17:09:15 @mujoco_parser.py:331] 119 joint found
+[0425 17:09:15 @mujoco_parser.py:331] 100 body found
+[0425 17:09:15 @mujoco_parser.py:489] scanning ob information...
+[0425 17:09:15 @mujoco_parser.py:538] after qpos, the ob size is reaching 123
+[0425 17:09:15 @mujoco_parser.py:538] after qvel, the ob size is reaching 247
+[0425 17:09:15 @mujoco_parser.py:538] after cfrc, the ob size is reaching 853
+[0425 17:09:15 @rollout_agent.py:55] The sampler 0 is online
+[0425 17:09:15 @rollout_agent.py:55] The sampler 1 is online
+[0425 17:09:15 @rollout_agent.py:55] The sampler 2 is online
+[0425 17:09:15 @rollout_agent.py:55] The sampler 3 is online
+[0425 17:09:15 @rollout_agent.py:55] The sampler 4 is online
+[0425 17:09:15 @gated_graph_policy_network.py:79] Network shape is [64, 64]
+[0425 17:09:15 @gated_graph_policy_network.py:79] Network shape is [64, 64]
+[0425 17:09:15 @gated_graph_policy_network.py:79] Network shape is [64, 64]
+[0425 17:09:15 @gated_graph_policy_network.py:79] Network shape is [64, 64]
+[0425 17:09:15 @gated_graph_policy_network.py:79] Network shape is [64, 64]
+[0425 17:09:15 @mujoco_parser.py:331] 119 joint found
+[0425 17:09:15 @mujoco_parser.py:331] 119 joint found
+[0425 17:09:15 @gated_graph_policy_network.py:343] building prop mlp for edge type [1]
+[0425 17:09:15 @mujoco_parser.py:331] 100 body found
+[0425 17:09:15 @mujoco_parser.py:331] 119 joint found
+[0425 17:09:15 @mujoco_parser.py:331] 100 body found
+[0425 17:09:15 @mujoco_parser.py:331] 100 body found
+[0425 17:09:15 @mujoco_parser.py:331] 119 joint found
+[0425 17:09:15 @mujoco_parser.py:331] 100 body found
+[0425 17:09:15 @mujoco_parser.py:331] 119 joint found
+[0425 17:09:15 @mujoco_parser.py:331] 100 body found
+[0425 17:09:15 @mujoco_parser.py:489] scanning ob information...
+[0425 17:09:15 @mujoco_parser.py:538] after qpos, the ob size is reaching 123
+[0425 17:09:15 @mujoco_parser.py:489] scanning ob information...
+[0425 17:09:15 @mujoco_parser.py:489] scanning ob information...
+[0425 17:09:15 @mujoco_parser.py:538] after qvel, the ob size is reaching 247
+[0425 17:09:15 @mujoco_parser.py:538] after qpos, the ob size is reaching 123
+[0425 17:09:15 @mujoco_parser.py:538] after cfrc, the ob size is reaching 853
+[0425 17:09:15 @mujoco_parser.py:538] after qpos, the ob size is reaching 123
+[0425 17:09:15 @mujoco_parser.py:538] after qvel, the ob size is reaching 247
+[0425 17:09:15 @mujoco_parser.py:538] after qvel, the ob size is reaching 247
+[0425 17:09:15 @mujoco_parser.py:538] after cfrc, the ob size is reaching 853
+[0425 17:09:15 @mujoco_parser.py:538] after cfrc, the ob size is reaching 853
+[0425 17:09:15 @mujoco_parser.py:489] scanning ob information...
+[0425 17:09:15 @mujoco_parser.py:538] after qpos, the ob size is reaching 123
+[0425 17:09:15 @mujoco_parser.py:538] after qvel, the ob size is reaching 247
+[0425 17:09:15 @mujoco_parser.py:489] scanning ob information...
+[0425 17:09:15 @mujoco_parser.py:538] after qpos, the ob size is reaching 123
+[0425 17:09:15 @mujoco_parser.py:538] after cfrc, the ob size is reaching 853
+[0425 17:09:15 @mujoco_parser.py:538] after qvel, the ob size is reaching 247
+[0425 17:09:15 @mujoco_parser.py:538] after cfrc, the ob size is reaching 853
+[0425 17:09:15 @gated_graph_policy_network.py:343] building prop mlp for edge type [1]
+[0425 17:09:15 @gated_graph_policy_network.py:343] building prop mlp for edge type [1]
+[0425 17:09:15 @gated_graph_policy_network.py:343] building prop mlp for edge type [1]
+[0425 17:09:15 @gated_graph_policy_network.py:343] building prop mlp for edge type [1]
+[0425 17:09:15 @gated_graph_policy_network.py:343] building prop mlp for edge type [1]
+[0425 17:09:15 @gated_graph_policy_network.py:374] building node update function for node type {'root': [0], 'joint': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118]}
+[0425 17:09:15 @gated_graph_policy_network.py:374] building node update function for node type {'root': [0], 'joint': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118]}
+[0425 17:09:15 @gated_graph_policy_network.py:374] building node update function for node type {'root': [0], 'joint': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118]}
+[0425 17:09:15 @gated_graph_policy_network.py:374] building node update function for node type {'root': [0], 'joint': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118]}
+[0425 17:09:15 @gated_graph_policy_network.py:374] building node update function for node type {'root': [0], 'joint': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118]}
+[0425 17:09:15 @gated_graph_policy_network.py:374] building node update function for node type {'root': [0], 'joint': [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39, 40, 41, 42, 43, 44, 45, 46, 47, 48, 49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 61, 62, 63, 64, 65, 66, 67, 68, 69, 70, 71, 72, 73, 74, 75, 76, 77, 78, 79, 80, 81, 82, 83, 84, 85, 86, 87, 88, 89, 90, 91, 92, 93, 94, 95, 96, 97, 98, 99, 100, 101, 102, 103, 104, 105, 106, 107, 108, 109, 110, 111, 112, 113, 114, 115, 116, 117, 118]}
+[0425 17:09:19 @graph_data_util.py:85] Building new send_idx and receive_idx for the model, current batch size: 64
+[0425 17:09:19 @model_saver.py:253] [LOAD/SAVE] checkpoint path is checkpoint/cent6-gnn-8-layer/CentipedeSix-v1_2023_04_24-17:13:35_2360_policy.npy
+[0425 17:09:19 @model_saver.py:58] 	LOADING tensorflow variables
+[0425 17:09:19 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy/embedding_HALF:0
+[0425 17:09:19 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy/MLP_embedding_node_type_root/layer_0/w:0
+[0425 17:09:19 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy/MLP_embedding_node_type_root/layer_0/b:0
+[0425 17:09:19 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy/MLP_embedding_node_type_joint/layer_0/w:0
+[0425 17:09:20 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy/MLP_embedding_node_type_joint/layer_0/b:0
+[0425 17:09:20 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/MLP_prop_edge_1/layer_0/w:0
+[0425 17:09:20 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/MLP_prop_edge_1/layer_0/b:0
+[0425 17:09:20 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/MLP_prop_edge_1/layer_1/w:0
+[0425 17:09:20 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/MLP_prop_edge_1/layer_1/b:0
+[0425 17:09:20 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/MLP_prop_edge_1/layer_2/w:0
+[0425 17:09:21 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/MLP_prop_edge_1/layer_2/b:0
+[0425 17:09:21 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_root/w_xi:0
+[0425 17:09:21 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_root/w_hi:0
+[0425 17:09:21 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_root/b_i:0
+[0425 17:09:21 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_root/w_xr:0
+[0425 17:09:21 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_root/w_hr:0
+[0425 17:09:22 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_root/b_r:0
+[0425 17:09:22 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_root/w_xu:0
+[0425 17:09:22 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_root/w_hu:0
+[0425 17:09:22 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_root/b_u:0
+[0425 17:09:22 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_joint/w_xi:0
+[0425 17:09:22 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_joint/w_hi:0
+[0425 17:09:23 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_joint/b_i:0
+[0425 17:09:23 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_joint/w_xr:0
+[0425 17:09:23 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_joint/w_hr:0
+[0425 17:09:23 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_joint/b_r:0
+[0425 17:09:23 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_joint/w_xu:0
+[0425 17:09:23 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_joint/w_hu:0
+[0425 17:09:24 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/GRU_node_joint/b_u:0
+[0425 17:09:24 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/MLP_out/layer_0/w:0
+[0425 17:09:24 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/MLP_out/layer_0/b:0
+[0425 17:09:24 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/MLP_out/layer_1/w:0
+[0425 17:09:24 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/MLP_out/layer_1/b:0
+[0425 17:09:25 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/MLP_out/layer_2/w:0
+[0425 17:09:25 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/MLP_out/layer_2/b:0
+[0425 17:09:25 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_policy_1/trpo_agent_policy/policy_logstd:0
+[0425 17:09:25 @mujoco_parser.py:331] 17 joint found
+[0425 17:09:25 @mujoco_parser.py:331] 15 body found
+[0425 17:09:25 @mujoco_parser.py:489] scanning ob information...
+[0425 17:09:25 @mujoco_parser.py:538] after qpos, the ob size is reaching 21
+[0425 17:09:25 @mujoco_parser.py:538] after qvel, the ob size is reaching 43
+[0425 17:09:25 @mujoco_parser.py:538] after cfrc, the ob size is reaching 139
+[0425 17:09:25 @mujoco_parser.py:331] 119 joint found
+[0425 17:09:25 @mujoco_parser.py:331] 100 body found
+[0425 17:09:25 @mujoco_parser.py:489] scanning ob information...
+[0425 17:09:25 @mujoco_parser.py:538] after qpos, the ob size is reaching 123
+[0425 17:09:25 @mujoco_parser.py:538] after qvel, the ob size is reaching 247
+[0425 17:09:25 @mujoco_parser.py:538] after cfrc, the ob size is reaching 853
+[0425 17:09:25 @model_saver.py:253] [LOAD/SAVE] checkpoint path is checkpoint/cent6-gnn-8-layer/CentipedeSix-v1_2023_04_24-17:13:35_2360_baseline.npy
+[0425 17:09:25 @model_saver.py:58] 	LOADING tensorflow variables
+[0425 17:09:25 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_baseline/policy_0/w:0
+[0425 17:09:25 @model_saver.py:80] WRN Skipping variable: trpo_agent_baseline/policy_0/w:0
+[0425 17:09:25 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_baseline/policy_0/b:0
+[0425 17:09:25 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_baseline/policy_1/w:0
+[0425 17:09:26 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_baseline/policy_1/b:0
+[0425 17:09:26 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_baseline/policy_output/w:0
+[0425 17:09:26 @model_saver.py:67] 		loading TF pretrained parameters trpo_agent_baseline/policy_output/b:0
+[0425 17:09:26 @optimization_agent.py:553] [LOAD_CKPT] saving files under the name of cent6-gnn-8-layer/CentipedeSix-v1_2023_04_24-17:13:35_2360
+[0425 17:09:26 @optimization_agent.py:557] [LOAD_CKPT] The normalizer is loaded in the rollout agents
+[0425 17:09:26 @graph_data_util.py:85] Building new send_idx and receive_idx for the model, current batch size: 1
+[0425 17:09:26 @graph_data_util.py:85] Building new send_idx and receive_idx for the model, current batch size: 1
+[0425 17:09:26 @graph_data_util.py:85] Building new send_idx and receive_idx for the model, current batch size: 1
+[0425 17:09:26 @graph_data_util.py:85] Building new send_idx and receive_idx for the model, current batch size: 1
+[0425 17:09:26 @graph_data_util.py:85] Building new send_idx and receive_idx for the model, current batch size: 1
+[0425 17:09:52 @rollout_master_agent.py:119] Rollouts generating ...
+[0425 17:09:52 @rollout_master_agent.py:121] 6252 time steps from 100 episodes collected
+[0425 17:09:54 @optimization_agent.py:130] {'avg_reward': 8.799228671401574}
+[0425 17:09:54 @main.py:77] ------------- Iteration 0 --------------
+[0425 17:09:54 @main.py:80] total time: 0.45 mins
+[0425 17:09:54 @main.py:82] optimization agent spent : 0.02 mins
+[0425 17:09:54 @main.py:83] rollout agent spent : 0.44 mins
+[0425 17:09:54 @main.py:85] 1000100 total steps have happened
+[0425 17:09:54 @main.py:95] Test performance (100 rollouts): 8.799228671401574
+[0425 17:09:54 @main.py:102] max: 103.55556428200586, min: -21.711868933712033, median: 0.6914702786254898
+[0425 17:09:54 @rollout_agent.py:88] kill message for sampler 4
+[0425 17:09:54 @rollout_agent.py:88] kill message for sampler 0
+[0425 17:09:54 @rollout_agent.py:88] kill message for sampler 3
+[0425 17:09:54 @rollout_agent.py:88] kill message for sampler 1
+[0425 17:09:54 @rollout_agent.py:88] kill message for sampler 2
