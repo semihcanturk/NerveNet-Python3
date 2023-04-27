@@ -116,7 +116,7 @@ class CentipedeEnv(mujoco_env.MujocoEnv, utils.EzPickle):
     def viewer_setup(self):
         self.viewer.cam.distance = self.model.stat.extent * 0.8
         body_name = 'torso_' + str(int(np.ceil(self.num_body / 2 - 1)))
-        self.viewer.cam.trackbodyid = self.model.body_names.index(body_name)
+        self.viewer.cam.trackbodyid = self.model.body_names.index(bytes(body_name, 'utf-8'))
 
     '''
     def _check_height(self):

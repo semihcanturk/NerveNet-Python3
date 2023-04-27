@@ -115,8 +115,8 @@ class ReacherEnv(mujoco_env.MujocoEnv, utils.EzPickle):
         return num_str[0].upper() + num_str[1:]
 
     def set_color(self):
-        reacher_id = self.model.geom_names.index('reacherIndicator')
-        avoider_id = self.model.geom_names.index('avoiderIndicator')
+        reacher_id = self.model.geom_names.index(b'reacherIndicator')
+        avoider_id = self.model.geom_names.index(b'avoiderIndicator')
 
         temp = np.array(self.model.geom_size)
         if self._task_indicator < 0:
