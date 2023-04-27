@@ -1,0 +1,22 @@
+#!/bin/bash
+#SBATCH --partition=long
+#SBATCH --cpus-per-task=8
+#SBATCH --gres=gpu:v100:1
+#SBATCH --mem=48G
+
+date
+hostname
+pwd
+cd $SLURM_SUBMIT_DIR
+
+module load cuda/10.0/cudnn/7.5 python/3.10
+conda activate nervenet
+
+pwd
+
+echo $@
+eval $@
+
+
+echo "All done in sbatch."
+date
