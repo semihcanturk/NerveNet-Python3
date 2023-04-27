@@ -1,32 +1,32 @@
 # Introduction
-It is the github repo for the paper: [NerveNet: Learning Structured Policy with Graph Neural Networks](http://www.cs.toronto.edu/~tingwuwang/nervenet.html).
-# Dependency
+This is an updated (compatible with Python 3) fork of the NerveNet paper: [NerveNet: Learning Structured Policy with Graph Neural Networks](http://www.cs.toronto.edu/~tingwuwang/nervenet.html).
 
-The repo is written in Python 2.7. You might need to modify the code repo for compatibility in Python 3.x. Sorry for the inconvenience!
+# Installation
 
-## 1. tensorflow >= 1.0.1
+The original repo uses TF 1.0.1, which is not compatible with Python 3.7. The lowest compatible version is 1.13.1, thus I suggest installing that. GPU version is not necessary.
 ```bash
-pip install tensorflow-gpu
+pip install tensorflow-gpu==1.13.1
 ```
-GPU version is not mandatory, since in the current repo, gpu is not used by default.
-## 2. gym >= 0.7.4
-### gym dependency
+If you encounter `TypeError: unsupported operand type(s) for -: 'NoneType' and 'NoneType'`, refer to this issue: https://github.com/WilsonWangTHU/NerveNet/issues/4. Updating the implementation of `_GatherDropNegatives` from https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/ops/math_grad.py should fix it.
+```bash
+pip install gym==0.7.4
+pip install 'gym[mujoco]'
+```
+The following dependencies may be required:
 ```bash
 apt-get install -y python-numpy python-dev cmake zlib1g-dev libjpeg-dev xvfb libav-tools xorg-dev python-opengl libboost-all-dev libsdl2-dev swig
 ```
-
-### gym installation via pip
-```bash
-pip install 'gym[mujoco]'
-```
 To use the mujoco, we actually need to use the mjkey.txt
 ## 3. mujoco
+
+We still rely on **MJPro 1.31**.
+Download `mjpro131` from: https://www.roboti.us/download.html
+Download the activation key from: https://www.roboti.us/file/mjkey.txt
+Put both in your `.mujoco` folder, and finally install mujoco 0.5.7
 ```bash
 pip install mujoco-py==0.5.7
 ```
-Note that currently, we **only** support **MJPro 1.31**.
-Please install mujoco 1.31 from the [official website](http://www.mujoco.org/), and use the mujoco-py version **0.5.7**.
-## 4. Misc
+Finally, install remaining dependencies:
 ```bash
 pip six beautifulsoup4 termcolor num2words
 ```
