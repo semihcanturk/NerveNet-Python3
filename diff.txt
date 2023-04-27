@@ -1,0 +1,638 @@
+diff --git a/README.md b/README.md
+index 0856e6e..b907e89 100644
+--- a/README.md
++++ b/README.md
+@@ -1,36 +1,36 @@
+ # Introduction
+-This is an updated (compatible with Python 3) fork of the NerveNet paper: [NerveNet: Learning Structured Policy with Graph Neural Networks](http://www.cs.toronto.edu/~tingwuwang/nervenet.html).
++It is the github repo for the paper: [NerveNet: Learning Structured Policy with Graph Neural Networks](http://www.cs.toronto.edu/~tingwuwang/nervenet.html).
++# Dependency
+ 
+-# Installation
++The repo is written in Python 2.7. You might need to modify the code repo for compatibility in Python 3.x. Sorry for the inconvenience!
+ 
+-The original repo uses TF 1.0.1, which is not compatible with Python 3.7. The lowest compatible version is 1.13.1, thus I suggest installing that. GPU version is not necessary.
++## 1. tensorflow >= 1.0.1
+ ```bash
+-pip install tensorflow-gpu==1.13.1
++pip install tensorflow-gpu
+ ```
+-If you encounter `TypeError: unsupported operand type(s) for -: 'NoneType' and 'NoneType'`, refer to this issue: https://github.com/WilsonWangTHU/NerveNet/issues/4. Updating the implementation of `_GatherDropNegatives` from https://github.com/tensorflow/tensorflow/blob/master/tensorflow/python/ops/math_grad.py should fix it.
+-```bash
+-pip install gym==0.7.4
+-pip install 'gym[mujoco]'
+-```
+-The following dependencies may be required:
++GPU version is not mandatory, since in the current repo, gpu is not used by default.
++## 2. gym >= 0.7.4
++### gym dependency
+ ```bash
+ apt-get install -y python-numpy python-dev cmake zlib1g-dev libjpeg-dev xvfb libav-tools xorg-dev python-opengl libboost-all-dev libsdl2-dev swig
+ ```
+-We still rely on **MJPro 1.31**, so we'll need an activation key.
+-
+-Download `mjpro131` from: https://www.roboti.us/download.html
+ 
+-Download the activation key from: https://www.roboti.us/file/mjkey.txt
+-
+-Put both in your `.mujoco` folder, and finally install the python bindings: mujoco-py==0.5.7
++### gym installation via pip
++```bash
++pip install 'gym[mujoco]'
++```
++To use the mujoco, we actually need to use the mjkey.txt
++## 3. mujoco
+ ```bash
+ pip install mujoco-py==0.5.7
+ ```
+-Finally, install remaining dependencies:
++Note that currently, we **only** support **MJPro 1.31**.
++Please install mujoco 1.31 from the [official website](http://www.mujoco.org/), and use the mujoco-py version **0.5.7**.
++## 4. Misc
+ ```bash
+ pip six beautifulsoup4 termcolor num2words
+ ```
+-# Running NerveNet
++# Run the code
+ To run the code, first cd into the 'tool' directory.
+ We provide three examples below (The checkpoint files are already included in the repo):
+ 
+diff --git a/agent/optimization_agent.py b/agent/optimization_agent.py
+index 2cf6955..a40e85e 100644
+--- a/agent/optimization_agent.py
++++ b/agent/optimization_agent.py
+@@ -17,7 +17,7 @@ from util import model_saver
+ from util import parallel_util
+ import os
+ from util import summary_handler
+-from agent.agent import base_agent
++from agent import base_agent
+ from graph_util import graph_data_util
+ 
+ 
+@@ -326,9 +326,9 @@ class optimization_agent(base_agent):
+         for i_epochs in range(self.args.optim_epochs +
+                               self.args.extra_vf_optim_epochs):
+ 
+-            minibatch_id_candidate = [*range(
++            minibatch_id_candidate = range(
+                 feed_dict[self.action_placeholder].shape[0]
+-            )]
++            )
+             self._npr.shuffle(minibatch_id_candidate)
+             # make sure that only timesteps per batch is used
+             minibatch_id_candidate = \
+@@ -472,14 +472,14 @@ class optimization_agent(base_agent):
+ 
+     def record_summary_and_ckpt(self, paths, stats, ob_normalizer_info):
+         # logger the information and write summary
+-        for k, v in iter(stats.items()):
++        for k, v in stats.iteritems():
+             logger.info(k + ": " + " " * (40 - len(k)) + str(v))
+ 
+         current_iteration = self.get_iteration_count()
+ 
+         if current_iteration % self.args.min_ckpt_iteration_diff == 0:
+             logger.info('------------- Printing hyper-parameters -----------')
+-            for key, val in iter(self.args.__dict__.items()):
++            for key, val in self.args.__dict__.iteritems():
+                 logger.info('{}: {}'.format(key, val))
+             logger.info('experiment name: '.format(self.get_experiment_name()))
+ 
+@@ -762,7 +762,7 @@ class optimization_agent(base_agent):
+                 for node_type in self.node_info['node_type_dict']:
+                     num_nodes = len(self.node_info['node_type_dict'][node_type])
+                     graph_candidate_id = [
+-                        [*range(i_id * num_nodes, (i_id + 1) * num_nodes)]
++                        range(i_id * num_nodes, (i_id + 1) * num_nodes)
+                         for i_id in candidate_id
+                     ]
+ 
+diff --git a/agent/rollout_agent.py b/agent/rollout_agent.py
+index 4782db8..bf1c5d1 100644
+--- a/agent/rollout_agent.py
++++ b/agent/rollout_agent.py
+@@ -16,7 +16,7 @@ from util import utils
+ from util import ob_normalizer
+ from util import logger
+ from util import parallel_util
+-from agent.agent import base_agent
++from agent import base_agent
+ 
+ 
+ class rollout_agent(base_agent):
+diff --git a/agent/rollout_master_agent.py b/agent/rollout_master_agent.py
+index b9bcd5e..ca292d7 100644
+--- a/agent/rollout_master_agent.py
++++ b/agent/rollout_master_agent.py
+@@ -13,7 +13,7 @@ from util import logger
+ from util import parallel_util
+ from util import model_saver
+ from six.moves import xrange
+-from agent.rollout_agent import rollout_agent
++from rollout_agent import rollout_agent
+ import numpy as np
+ from graph_util import structure_mapper
+ 
+diff --git a/environments/asset_generator.py b/environments/asset_generator.py
+index ab0d2f2..a6110f6 100644
+--- a/environments/asset_generator.py
++++ b/environments/asset_generator.py
+@@ -17,7 +17,7 @@ TASK_DICT = {
+     'Centipede': [3, 5, 7] + [4, 6, 8, 10, 12, 14] + [20, 30, 40, 50],
+     'CpCentipede': [3, 5, 7] + [4, 6, 8, 10, 12, 14],
+     'Reacher': [0, 1, 2, 3, 4, 5, 6, 7],
+-    'Snake': [3, 4, 5, 6, 7, 8, 9] + [10, 20, 40],
++    'Snake': range(3, 10) + [10, 20, 40],
+ }
+ OUTPUT_BASE_DIR = os.path.join(init_path.get_abs_base_dir(),
+                                'environments', 'assets')
+diff --git a/environments/register.py b/environments/register.py
+index 414fd00..e4b6e65 100644
+--- a/environments/register.py
++++ b/environments/register.py
+@@ -7,7 +7,7 @@
+ 
+ from gym.envs.registration import register
+ import num2words
+-from environments import asset_generator
++import asset_generator
+ import numpy as np
+ 
+ MAX_EPISODE_STEPS_DICT = {
+@@ -52,7 +52,7 @@ MULTI_TASK_DICT.update(ROBUSTNESS_TASK_DICT)
+ name_list = []  # record all the environments available
+ 
+ # register the transfer tasks
+-for env_title, env in iter(ROBUSTNESS_TASK_DICT.items()):
++for env_title, env in ROBUSTNESS_TASK_DICT.iteritems():
+ 
+     for i_env in env:
+         file_name = 'environments.multitask_env.walkers:'
+diff --git a/environments/transfer_env/centipede_env.py b/environments/transfer_env/centipede_env.py
+index 0caf1f9..d1e6266 100644
+--- a/environments/transfer_env/centipede_env.py
++++ b/environments/transfer_env/centipede_env.py
+@@ -116,7 +116,7 @@ class CentipedeEnv(mujoco_env.MujocoEnv, utils.EzPickle):
+     def viewer_setup(self):
+         self.viewer.cam.distance = self.model.stat.extent * 0.8
+         body_name = 'torso_' + str(int(np.ceil(self.num_body / 2 - 1)))
+-        self.viewer.cam.trackbodyid = self.model.body_names.index(bytes(body_name, 'utf-8'))
++        self.viewer.cam.trackbodyid = self.model.body_names.index(body_name)
+ 
+     '''
+     def _check_height(self):
+diff --git a/environments/transfer_env/reacher_env.py b/environments/transfer_env/reacher_env.py
+index 7404cd6..df3c902 100644
+--- a/environments/transfer_env/reacher_env.py
++++ b/environments/transfer_env/reacher_env.py
+@@ -115,8 +115,8 @@ class ReacherEnv(mujoco_env.MujocoEnv, utils.EzPickle):
+         return num_str[0].upper() + num_str[1:]
+ 
+     def set_color(self):
+-        reacher_id = self.model.geom_names.index(b'reacherIndicator')
+-        avoider_id = self.model.geom_names.index(b'avoiderIndicator')
++        reacher_id = self.model.geom_names.index('reacherIndicator')
++        avoider_id = self.model.geom_names.index('avoiderIndicator')
+ 
+         temp = np.array(self.model.geom_size)
+         if self._task_indicator < 0:
+diff --git a/graph_util/gnn_util.py b/graph_util/gnn_util.py
+index 2efa301..33bf342 100644
+--- a/graph_util/gnn_util.py
++++ b/graph_util/gnn_util.py
+@@ -10,7 +10,7 @@
+ 
+ import init_path
+ from util import logger
+-from graph_util import mujoco_parser
++import mujoco_parser
+ import numpy as np
+ 
+ 
+@@ -138,7 +138,7 @@ def get_receive_send_idx(node_info):
+     edge_dict = mujoco_parser.EDGE_TYPE
+     edge_type_list = []  # if one type of edge exist, register
+ 
+-    for edge_id in iter(edge_dict.values()):
++    for edge_id in edge_dict.itervalues():
+         if edge_id == 0:
+             continue  # the self loop is not considered here
+         if (node_info['relation_matrix'] == edge_id).any():
+diff --git a/graph_util/structure_mapper.py b/graph_util/structure_mapper.py
+index 05df4f1..3e4bcc9 100644
+--- a/graph_util/structure_mapper.py
++++ b/graph_util/structure_mapper.py
+@@ -7,7 +7,7 @@
+ 
+ import init_path
+ from util import logger
+-from graph_util import mujoco_parser
++import mujoco_parser
+ import numpy as np
+ 
+ 
+@@ -99,7 +99,7 @@ def map_input(transfer_env, i_value, added_constant, gnn_option_list):
+     assert len(i_value) == ienv_info['debug_info']['ob_size']
+ 
+     ienv_node_name_list = [node['name'] for node in ienv_info['tree']]
+-    for output_id, output_node_id in iter(oenv_info['input_dict'].items()):
++    for output_id, output_node_id in oenv_info['input_dict'].iteritems():
+         # get the name of the joint
+         node_name = oenv_info['tree'][output_id]['name']
+         # if the node is alreay in the input environment?
+@@ -146,7 +146,7 @@ def map_transfer_env_running_mean(ienv, oenv, running_mean_info,
+     }
+     ienv_node_name_list = [node['name'] for node in ienv_info['tree']]
+ 
+-    for node, oenv_digit in iter(oenv_info['input_dict'].items()):
++    for node, oenv_digit in oenv_info['input_dict'].iteritems():
+         node_name = oenv_info['tree'][node]['name']
+         # if the node is alreay in the input environment?
+         if node_name in ienv_node_name_list:
+diff --git a/network/baseline_network.py b/network/baseline_network.py
+index d442cbf..d7e2f45 100644
+--- a/network/baseline_network.py
++++ b/network/baseline_network.py
+@@ -8,7 +8,7 @@
+ import init_path
+ import tensorflow as tf
+ from util import logger
+-from network.policy_network import policy_network
++from policy_network import policy_network
+ 
+ 
+ class tf_baseline_network(policy_network):
+diff --git a/network/gated_graph_baseline_network.py b/network/gated_graph_baseline_network.py
+index 93f14c4..9d3f377 100644
+--- a/network/gated_graph_baseline_network.py
++++ b/network/gated_graph_baseline_network.py
+@@ -7,8 +7,8 @@
+ # -----------------------------------------------------------------------------
+ import init_path
+ from util import logger
+-from network.gated_graph_policy_network import GGNN
+-from network.baseline_network import tf_baseline_network
++from gated_graph_policy_network import GGNN
++from baseline_network import tf_baseline_network
+ 
+ 
+ class tf_ggnn_baseline_network(GGNN, tf_baseline_network):
+diff --git a/network/gated_graph_policy_network.py b/network/gated_graph_policy_network.py
+index d2c46db..94fa2a9 100644
+--- a/network/gated_graph_policy_network.py
++++ b/network/gated_graph_policy_network.py
+@@ -8,7 +8,7 @@
+ import init_path
+ import tensorflow as tf
+ import numpy as np
+-from network.policy_network import policy_network
++from policy_network import policy_network
+ from util import logger
+ from graph_util import mujoco_parser
+ from graph_util import gnn_util
+@@ -290,7 +290,7 @@ class GGNN(policy_network):
+                 embedding_vec_size = int(embedding_vec_size)
+                 self._embedding_variable = {}
+                 out = self._npr.randn(
+-                    embedding_vec_size, int(self._input_feat_dim / 2)
++                    embedding_vec_size, self._input_feat_dim / 2
+                 ).astype(np.float32)
+                 out *= 1.0 / np.sqrt(np.square(out).sum(axis=0, keepdims=True))
+                 self._embedding_variable[False] = tf.Variable(
+@@ -298,7 +298,7 @@ class GGNN(policy_network):
+                 )
+ 
+                 if np.any([node_size == 0 for _, node_size
+-                           in iter(self._node_info['ob_size_dict'].items())]):
++                           in self._node_info['ob_size_dict'].iteritems()]):
+ 
+                     out = self._npr.randn(
+                         embedding_vec_size, self._input_feat_dim
+@@ -313,7 +313,7 @@ class GGNN(policy_network):
+             # tensor shape (None, para_size) --> (None, input_dim - ob_size)
+             self._MLP_ob_mapping = {
+                 node_type: nn.MLP(
+-                    [int(self._input_feat_dim / 2),
++                    [self._input_feat_dim / 2,
+                      self._node_info['ob_size_dict'][node_type]],
+                     init_method=self._init_method,
+                     act_func=['tanh'] * 1,  # one layer at most
+diff --git a/plotting_utils.py b/plotting_utils.py
+deleted file mode 100644
+index 95b69e9..0000000
+--- a/plotting_utils.py
++++ /dev/null
+@@ -1,91 +0,0 @@
+-import os
+-import re
+-
+-import numpy as np
+-import pandas as pd
+-
+-CENT_DICT = {'Six': 6, 'Eight': 8, 'Ten': 10, 'Twelve': 12, 'Twenty': 20, 'Forty': 40}
+-
+-
+-def collect_train_data(logfile):
+-    iters, avg_rewards, entropies, loss_kl, loss_surr, loss_vf, loss_l2 = list(), list(), list(), list(), list(), list(), list()
+-
+-    pattern = r"(.*)@main.py:85]\D*?(\d+)\D*?"
+-    with open(logfile) as f:
+-        lines = f.readlines()
+-        for line in lines:
+-            num_iters = re.match(pattern, line)
+-            if num_iters is not None:
+-                num_iters = int(num_iters.group(0).rsplit(' ', 1)[-1])
+-                iters.append(int(num_iters))
+-            elif 'avg_reward:' in line:
+-                avg_rewards.append(float(line.rsplit(' ', 1)[-1]))
+-            elif 'entropy:' in line:
+-                entropies.append(float(line.rsplit(' ', 1)[-1]))
+-            elif ' kl:' in line:
+-                loss_kl.append(float(line.rsplit(' ', 1)[-1]))
+-            elif 'surr_loss:' in line:
+-                loss_surr.append(float(line.rsplit(' ', 1)[-1]))
+-            elif 'vf_loss:' in line:
+-                loss_vf.append(float(line.rsplit(' ', 1)[-1]))
+-            elif 'weight_l2_loss:' in line:
+-                loss_l2.append(float(line.rsplit(' ', 1)[-1]))
+-
+-    iters = np.array(iters)
+-    avg_rewards = np.array(avg_rewards)
+-    entropies = np.array(entropies)
+-    loss_kl = np.array(loss_kl)
+-    loss_surr = np.array(loss_surr)
+-    loss_vf = np.array(loss_vf)
+-    loss_l2 = np.array(loss_l2)
+-    return iters, avg_rewards, entropies, loss_kl, loss_surr, loss_vf, loss_l2
+-
+-
+-def generate_train_df(dict):
+-    reward_dict = dict.copy()
+-    for model_name, logfile in iter(dict.items()):
+-        iters, avg_rewards, entropies, loss_kl, loss_surr, loss_vf, loss_l2 = collect_train_data(logfile)
+-        reward_dict[model_name] = avg_rewards
+-    df = pd.DataFrame.from_dict(reward_dict)
+-    df['iter'] = iters
+-    df.set_index('iter', inplace=True)
+-    return df
+-
+-
+-def collect_test_data(logfile):
+-    with open(logfile) as f:
+-        lines = f.readlines()
+-        for line in lines:
+-            if 'Test performance (100 rollouts):' in line:
+-                avg = float(line.rsplit(' ', 1)[-1])
+-            elif 'max:' in line:
+-                max = float(line.split(',', 1)[0].rsplit(' ', 1)[-1])
+-    return avg, max
+-
+-
+-def get_all_files(path):
+-    files = []
+-    for dirpath, dirnames, filenames in os.walk(path):
+-        for filename in filenames:
+-            files.append(os.path.join(dirpath, filename))
+-    return files
+-
+-
+-def get_centipede_type(logfile):
+-    for k in CENT_DICT.keys():
+-        if k in logfile:
+-            return CENT_DICT[k]
+-    raise KeyError(f'Key not found')
+-
+-
+-def generate_transfer_df(path):
+-    rows = list()
+-    logfiles = get_all_files(path)
+-    for logfile in logfiles:
+-        path_comps = logfile.split('/')
+-        model = path_comps[2]
+-        type = get_centipede_type(path_comps[-1])
+-        avg, max = collect_test_data(logfile)
+-        rows.append([model, type, avg, max])
+-    df = pd.DataFrame(rows, columns=['Model', 'Centipede Type', 'Avg Reward', 'Max Reward'])
+-    return df
+diff --git a/requirements.txt b/requirements.txt
+deleted file mode 100644
+index a7f7d67..0000000
+--- a/requirements.txt
++++ /dev/null
+@@ -1,131 +0,0 @@
+-absl-py==1.4.0
+-anyio==3.6.2
+-appnope==0.1.3
+-argon2-cffi==21.3.0
+-argon2-cffi-bindings==21.2.0
+-astor==0.8.1
+-astunparse==1.6.3
+-attrs==23.1.0
+-backcall==0.2.0
+-beautifulsoup4==4.12.2
+-bleach==6.0.0
+-cachetools==5.3.0
+-certifi==2022.12.7
+-cffi==1.15.1
+-charset-normalizer==3.1.0
+-cycler==0.11.0
+-Cython==0.29.34
+-debugpy==1.6.7
+-decorator==5.1.1
+-defusedxml==0.7.1
+-docopt==0.6.2
+-entrypoints==0.4
+-fasteners==0.18
+-fastjsonschema==2.16.3
+-flatbuffers==23.3.3
+-fonttools==4.38.0
+-gast==0.4.0
+-glfw==2.5.9
+-google-auth==2.17.3
+-google-auth-oauthlib==0.4.6
+-google-pasta==0.2.0
+-grpcio==1.53.0
+-gym==0.7.4
+-h5py==3.8.0
+-idna==3.4
+-imageio==2.27.0
+-importlib-metadata==6.3.0
+-importlib-resources==5.12.0
+-ipykernel==6.16.2
+-ipython==7.34.0
+-ipython-genutils==0.2.0
+-ipywidgets==8.0.6
+-jedi==0.18.2
+-Jinja2==3.1.2
+-jsonschema==4.17.3
+-jupyter==1.0.0
+-jupyter-console==6.6.3
+-jupyter-server==1.24.0
+-jupyter_client==7.4.9
+-jupyter_core==4.12.0
+-jupyterlab-pygments==0.2.2
+-jupyterlab-widgets==3.0.7
+-keras==2.11.0
+-Keras-Applications==1.0.8
+-Keras-Preprocessing==1.1.2
+-kiwisolver==1.4.4
+-libclang==16.0.0
+-lxml==4.9.2
+-Markdown==3.4.3
+-MarkupSafe==2.1.2
+-matplotlib==3.5.3
+-matplotlib-inline==0.1.6
+-mistune==2.0.5
+-mock==5.0.1
+-mujoco-py==0.5.7
+-nbclassic==0.5.5
+-nbclient==0.7.3
+-nbconvert==7.3.1
+-nbformat==5.8.0
+-nest-asyncio==1.5.6
+-notebook==6.5.4
+-notebook_shim==0.2.2
+-num2words==0.5.12
+-numpy==1.21.6
+-oauthlib==3.2.2
+-opt-einsum==3.3.0
+-packaging==23.1
+-pandas==1.3.5
+-pandocfilters==1.5.0
+-parso==0.8.3
+-pexpect==4.8.0
+-pickleshare==0.7.5
+-Pillow==9.5.0
+-pkgutil_resolve_name==1.3.10
+-prometheus-client==0.16.0
+-prompt-toolkit==3.0.38
+-protobuf==3.19.6
+-psutil==5.9.5
+-ptyprocess==0.7.0
+-pyasn1==0.4.8
+-pyasn1-modules==0.2.8
+-pycparser==2.21
+-pyglet==2.0.5
+-Pygments==2.15.1
+-PyOpenGL==3.1.6
+-pyparsing==3.0.9
+-pyrsistent==0.19.3
+-python-dateutil==2.8.2
+-pytz==2023.3
+-pyzmq==25.0.2
+-qtconsole==5.4.2
+-QtPy==2.3.1
+-requests==2.28.2
+-requests-oauthlib==1.3.1
+-rsa==4.9
+-scipy==1.7.3
+-seaborn==0.12.2
+-Send2Trash==1.8.0
+-six==1.16.0
+-sniffio==1.3.0
+-soupsieve==2.4
+-tensorboard==1.13.1
+-tensorboard-data-server==0.6.1
+-tensorboard-plugin-wit==1.8.1
+-tensorflow==1.13.1
+-tensorflow-estimator==1.13.0
+-tensorflow-io-gcs-filesystem==0.32.0
+-termcolor==2.2.0
+-terminado==0.17.1
+-tinycss2==1.2.1
+-tornado==6.2
+-traitlets==5.9.0
+-typing_extensions==4.5.0
+-urllib3==1.26.15
+-wcwidth==0.2.6
+-webencodings==0.5.1
+-websocket-client==1.5.1
+-Werkzeug==2.2.3
+-widgetsnbextension==4.0.7
+-wrapt==1.15.0
+-zipp==3.15.0
+diff --git a/util/model_saver.py b/util/model_saver.py
+index f9c3d21..ce36756 100644
+--- a/util/model_saver.py
++++ b/util/model_saver.py
+@@ -53,12 +53,11 @@ def load_tf_model(sess, model_path, tf_var_list=[], ignore_prefix='INVALID',
+     '''
+         @brief: load the tensorflow variables from a numpy npy files
+     '''
+-    model_path = os.path.join('checkpoint', model_path)
+     is_file_valid(model_path)
+     logger.info('\tLOADING tensorflow variables')
+ 
+     # load the parameters
+-    output_save_list = np.load(model_path, encoding='latin1', allow_pickle=True).item()
++    output_save_list = np.load(model_path, encoding='latin1').item()
+     tf_name_list = [var.name for var in tf_var_list]
+ 
+     # get the weights one by one
+@@ -145,7 +144,7 @@ def load_numpy_model(model_path, numpy_var_list={}):
+     is_file_valid(model_path)
+     logger.info('LOADING numpy variables')
+ 
+-    output_save_list = np.load(model_path, encoding='latin1', allow_pickle=True).item()
++    output_save_list = np.load(model_path, encoding='latin1').item()
+     numpy_name_list = [key for key, val in numpy_var_list.items()]
+ 
+     # get the weights one by one
+diff --git a/wrapper_mila.sb b/wrapper_mila.sb
+deleted file mode 100644
+index 1a7431b..0000000
+--- a/wrapper_mila.sb
++++ /dev/null
+@@ -1,22 +0,0 @@
+-#!/bin/bash
+-#SBATCH --partition=long
+-#SBATCH --cpus-per-task=8
+-#SBATCH --gres=gpu:v100:1
+-#SBATCH --mem=48G
+-
+-date
+-hostname
+-pwd
+-cd $SLURM_SUBMIT_DIR
+-
+-module load cuda/10.0/cudnn/7.5 python/3.10
+-conda activate nervenet
+-
+-pwd
+-
+-echo $@
+-eval $@
+-
+-
+-echo "All done in sbatch."
+-date
+diff --git a/wrapper_mila_small.sb b/wrapper_mila_small.sb
+deleted file mode 100644
+index d876099..0000000
+--- a/wrapper_mila_small.sb
++++ /dev/null
+@@ -1,23 +0,0 @@
+-#!/bin/bash
+-#SBATCH --partition=long
+-#SBATCH --cpus-per-task=4
+-#SBATCH --gres=gpu:v100:1
+-#SBATCH --mem=48G
+-
+-date
+-hostname
+-pwd
+-
+-module load cuda/10.0/cudnn/7.5 python/3.10
+-cd $SLURM_SUBMIT_DIR
+-conda init
+-conda activate nervenet
+-
+-pwd
+-
+-echo $@
+-eval $@
+-
+-
+-echo "All done in sbatch."
+-date
