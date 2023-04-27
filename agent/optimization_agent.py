@@ -17,7 +17,7 @@ from util import model_saver
 from util import parallel_util
 import os
 from util import summary_handler
-from agent import base_agent
+from agent.agent import base_agent
 from graph_util import graph_data_util
 
 
@@ -326,9 +326,9 @@ class optimization_agent(base_agent):
         for i_epochs in range(self.args.optim_epochs +
                               self.args.extra_vf_optim_epochs):
 
-            minibatch_id_candidate = range(
+            minibatch_id_candidate = [*range(
                 feed_dict[self.action_placeholder].shape[0]
-            )
+            )]
             self._npr.shuffle(minibatch_id_candidate)
             # make sure that only timesteps per batch is used
             minibatch_id_candidate = \
@@ -472,14 +472,14 @@ class optimization_agent(base_agent):
 
     def record_summary_and_ckpt(self, paths, stats, ob_normalizer_info):
         # logger the information and write summary
-        for k, v in stats.iteritems():
+        for k, v in iter(stats.items()):
             logger.info(k + ": " + " " * (40 - len(k)) + str(v))
 
         current_iteration = self.get_iteration_count()
 
         if current_iteration % self.args.min_ckpt_iteration_diff == 0:
             logger.info('------------- Printing hyper-parameters -----------')
-            for key, val in self.args.__dict__.iteritems():
+            for key, val in iter(self.args.__dict__.items()):
                 logger.info('{}: {}'.format(key, val))
             logger.info('experiment name: '.format(self.get_experiment_name()))
 
@@ -762,7 +762,7 @@ class optimization_agent(base_agent):
                 for node_type in self.node_info['node_type_dict']:
                     num_nodes = len(self.node_info['node_type_dict'][node_type])
                     graph_candidate_id = [
-                        range(i_id * num_nodes, (i_id + 1) * num_nodes)
+                        [*range(i_id * num_nodes, (i_id + 1) * num_nodes)]
                         for i_id in candidate_id
                     ]
 

@@ -8,7 +8,7 @@
 import init_path
 import tensorflow as tf
 import numpy as np
-from policy_network import policy_network
+from network.policy_network import policy_network
 from util import logger
 from graph_util import mujoco_parser
 from graph_util import gnn_util
@@ -290,7 +290,7 @@ class GGNN(policy_network):
                 embedding_vec_size = int(embedding_vec_size)
                 self._embedding_variable = {}
                 out = self._npr.randn(
-                    embedding_vec_size, self._input_feat_dim / 2
+                    embedding_vec_size, int(self._input_feat_dim / 2)
                 ).astype(np.float32)
                 out *= 1.0 / np.sqrt(np.square(out).sum(axis=0, keepdims=True))
                 self._embedding_variable[False] = tf.Variable(
@@ -298,7 +298,7 @@ class GGNN(policy_network):
                 )
 
                 if np.any([node_size == 0 for _, node_size
-                           in self._node_info['ob_size_dict'].iteritems()]):
+                           in iter(self._node_info['ob_size_dict'].items())]):
 
                     out = self._npr.randn(
                         embedding_vec_size, self._input_feat_dim
@@ -313,7 +313,7 @@ class GGNN(policy_network):
             # tensor shape (None, para_size) --> (None, input_dim - ob_size)
             self._MLP_ob_mapping = {
                 node_type: nn.MLP(
-                    [self._input_feat_dim / 2,
+                    [int(self._input_feat_dim / 2),
                      self._node_info['ob_size_dict'][node_type]],
                     init_method=self._init_method,
                     act_func=['tanh'] * 1,  # one layer at most

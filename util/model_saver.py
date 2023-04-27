@@ -53,11 +53,12 @@ def load_tf_model(sess, model_path, tf_var_list=[], ignore_prefix='INVALID',
     '''
         @brief: load the tensorflow variables from a numpy npy files
     '''
+    model_path = os.path.join('checkpoint', model_path)
     is_file_valid(model_path)
     logger.info('\tLOADING tensorflow variables')
 
     # load the parameters
-    output_save_list = np.load(model_path, encoding='latin1').item()
+    output_save_list = np.load(model_path, encoding='latin1', allow_pickle=True).item()
     tf_name_list = [var.name for var in tf_var_list]
 
     # get the weights one by one
@@ -144,7 +145,7 @@ def load_numpy_model(model_path, numpy_var_list={}):
     is_file_valid(model_path)
     logger.info('LOADING numpy variables')
 
-    output_save_list = np.load(model_path, encoding='latin1').item()
+    output_save_list = np.load(model_path, encoding='latin1', allow_pickle=True).item()
     numpy_name_list = [key for key, val in numpy_var_list.items()]
 
     # get the weights one by one

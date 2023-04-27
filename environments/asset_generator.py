@@ -17,7 +17,7 @@ TASK_DICT = {
     'Centipede': [3, 5, 7] + [4, 6, 8, 10, 12, 14] + [20, 30, 40, 50],
     'CpCentipede': [3, 5, 7] + [4, 6, 8, 10, 12, 14],
     'Reacher': [0, 1, 2, 3, 4, 5, 6, 7],
-    'Snake': range(3, 10) + [10, 20, 40],
+    'Snake': [3, 4, 5, 6, 7, 8, 9] + [10, 20, 40],
 }
 OUTPUT_BASE_DIR = os.path.join(init_path.get_abs_base_dir(),
                                'environments', 'assets')
