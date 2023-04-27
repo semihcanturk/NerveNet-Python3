@@ -16,13 +16,13 @@ The following dependencies may be required:
 ```bash
 apt-get install -y python-numpy python-dev cmake zlib1g-dev libjpeg-dev xvfb libav-tools xorg-dev python-opengl libboost-all-dev libsdl2-dev swig
 ```
-To use the mujoco, we actually need to use the mjkey.txt
-## 3. mujoco
+We still rely on **MJPro 1.31**, so we'll need an activation key.
 
-We still rely on **MJPro 1.31**.
 Download `mjpro131` from: https://www.roboti.us/download.html
+
 Download the activation key from: https://www.roboti.us/file/mjkey.txt
-Put both in your `.mujoco` folder, and finally install mujoco 0.5.7
+
+Put both in your `.mujoco` folder, and finally install the python bindings: mujoco-py==0.5.7
 ```bash
 pip install mujoco-py==0.5.7
 ```
@@ -30,7 +30,7 @@ Finally, install remaining dependencies:
 ```bash
 pip six beautifulsoup4 termcolor num2words
 ```
-# Run the code
+# Running NerveNet
 To run the code, first cd into the 'tool' directory.
 We provide three examples below (The checkpoint files are already included in the repo):
 
